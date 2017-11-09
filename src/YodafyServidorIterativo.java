@@ -1,12 +1,8 @@
-package Practica2;
-
-import Practica2.ProcesadorYodafy;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-
 
 //
 // YodafyServidorIterativo
@@ -23,12 +19,10 @@ public class YodafyServidorIterativo {
 		// Número de bytes leídos
 		int bytesLeidos=0;
 		
-                Socket socketServicio;
-                
 		try {
 			// Abrimos el socket en modo pasivo, escuchando el en puerto indicado por "port"
 			//////////////////////////////////////////////////
-			ServerSocket serverSocket = new ServerSocket(port);
+			// ...serverSocket=... (completar)
 			//////////////////////////////////////////////////
 			
 			// Mientras ... siempre!
@@ -36,7 +30,7 @@ public class YodafyServidorIterativo {
 				
 				// Aceptamos una nueva conexión con accept()
 				/////////////////////////////////////////////////
-				 socketServicio= serverSocket.accept();
+				// socketServicio=... (completar)
 				//////////////////////////////////////////////////
 				
 				// Creamos un objeto de la clase ProcesadorYodafy, pasándole como 

@@ -1,15 +1,10 @@
-package Practica2;
-
 //
 // YodafyServidorIterativo
 // (CC) jjramos, 2012
 //
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Random;
 
@@ -40,7 +35,7 @@ public class ProcesadorYodafy {
 	void procesa(){
 		
 		// Como máximo leeremos un bloque de 1024 bytes. Esto se puede modificar.
-		String datosRecibido;
+		byte [] datosRecibidos=new byte[1024];
 		int bytesRecibidos=0;
 		
 		// Array de bytes para enviar la respuesta. Podemos reservar memoria cuando vayamos a enviarka:
@@ -49,24 +44,25 @@ public class ProcesadorYodafy {
 		
 		try {
 			// Obtiene los flujos de escritura/lectura
-			PrintWriter outPrinter = new PrintWriter(socketServicio.getOutputStream(),true);
-			BufferedReader inReader = new BufferedReader(new InputStreamReader(socketServicio.getInputStream()));
+			inputStream=socketServicio.getInputStream();
+			outputStream=socketServicio.getOutputStream();
 			
 			// Lee la frase a Yodaficar:
 			////////////////////////////////////////////////////////
-                        datosRecibido = inReader.readLine();
+			// read ... datosRecibidos.. (Completar)
 			////////////////////////////////////////////////////////
 			
 			// Yoda hace su magia:
 			// Creamos un String a partir de un array de bytes de tamaño "bytesRecibidos":
-			
+			String peticion=new String(datosRecibidos,0,bytesRecibidos);
 			// Yoda reinterpreta el mensaje:
-			String respuesta=yodaDo(datosRecibido);
+			String respuesta=yodaDo(peticion);
 			// Convertimos el String de respuesta en una array de bytes:
+			datosEnviar=respuesta.getBytes();
 			
 			// Enviamos la traducción de Yoda:
 			////////////////////////////////////////////////////////
-			outPrinter.println(respuesta);
+			// ... write ... datosEnviar... datosEnviar.length ... (Completar)
 			////////////////////////////////////////////////////////
 			
 			
