@@ -20,22 +20,24 @@ while True:
         print('conexion desde', client_address)
 
         # Envias el menú
-        connection.sendall('Menú de opciones:\n-Registrarse(1) \n-Encriptar(2) \n-Desencriptar(3)')
+        connection.sendall('Menú de opciones:\n-Registrarse(1) \n-Encriptar(2) \n-Desencriptar(3)'.encode())
 
-        #Lectura del la opción
+        # Lectura del la opción
+        msg_received = ''
         while True:
             data = connection.recv(4)
-            global msg_received
-            msg_received += data
             if not data:
                 print('mensaje completo recibido')
                 break
+            msg_received += data.decode()
 
         option = int(msg_received)
-        if 1 < option < 3:
-            connection.sendall(1)       # 1 opción correcta
+        if 1 <= option <= 3:
+            print('opcion correcta')
+            connection.sendall('1'.encode())       # 1 opción correcta
         else:
-            connection.sendall(0)       # 0 opción incorrecta
+            print('opcion incorrecta')
+            connection.sendall('0'.encode())       # 0 opción incorrecta
             continue
 
         if option == 1:

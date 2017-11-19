@@ -5,26 +5,28 @@ import sys
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 server_address = ('localhost', 8989)
-print('Conectandose a %s puerto %s') % server_address
+print('Conectandose a %s puerto %s' % server_address)
 
 sock.connect(server_address)
 
 
 try:
     # Lectura de las opciones
-
-    data = sock.recv(1024)
-    print('received', repr(data))
+    data = sock.recv(512)
+    print(data.decode())
 
     # Send data
-    numero = input()
-    print >>sys.stderr, 'sending "%s"' % numero
-    sock.sendall(str(numero))
+    option = input()
+    sock.sendall(option.encode())
 
-    # Received
-    data = sock.recv(1024)
-    print('received', repr(data))
+    # Respuesta del servidor / Si descomentas esta línea se ve el error
+    # sock.recv(1)
+
+    if True:
+        print('Opción correcta')
+    else:
+        print('Opción incorrecta')
 
 finally:
-    print >>sys.stderr, 'closing socket'
+    print('Cerrando el socket')
     sock.close
