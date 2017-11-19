@@ -1,7 +1,7 @@
 import socket
 import sys
 
-# Creamos el socket TCP
+# Creación el socket TCP
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 server_address = ('localhost', 8989)
