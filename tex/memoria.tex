@@ -27,11 +27,14 @@ Guillermo Galindo Ortuño \\
 \end{titlepage}
 \newpage
 \section{Descripci\'on de la aplicaci\'on, funcionalidad y actores que intervienen}
-Nuestro proyecto se basa en un encriptador y desencriptador de mensajes. En este caso hemos utilizado una estructura de cliente-servidor, en la que el cliente sera el que quiera encriptar o descriptar un mensaje mienteas que el servidor sera el que se encargue de estas tareas. El servidor permite que que varios clientes se conecten cocurrentemente.\\
-Para este proyecto usaremos sockets TCP lo que nos garantiza un orden FIFO, importante para que los mensajes se transmitan correctamente, y adem\'as se garantiza entre el servidor y los clientes es fiable.
+Nuestro proyecto se basa en un encriptador y desencriptador de mensajes. En este caso hemos utilizado una estructura de cliente-servidor, en la que el cliente ser\'a el que desea encriptar o descriptar un mensaje mienteas que el servidor ser\'a el que se encargue de estas tareas. El servidor permite que que varios clientes se conecten cocurrentemente.\\
+Basicamente, el sistema de encriptado funciona mediante claves publicas y privadas, a cada cliente que se registre en el servidor con un usuario y una contraseña se le asigna una clave p\'ublica y una clave privada. Cuando un cliente solicite encriptar un mensaje se pedir\'a el login del usuario destinatario, y este mensaje se cifrara con las claves del usuario registrado y se devolver\'a el mensaje encriptado. Y viceversa, si se quire desencriptar un mensaje, el cliente se identificara con su login y contraseña y adjuntar\'a el mensaje encriptado que quiere desencriptar, acto seguido el servidor le devolvera el mensaje desencriptado.\\
+Para este proyecto usaremos sockets TCP lo que nos garantiza un orden FIFO, importante para que los mensajes se transmitan correctamente, y adem\'as se garantiza que la comunicaci\'on entre el servidor y los clientes es fiable.
 \newpage
 \section{Diagrama de estados del servidor}
-Basicamente, el sistema de encriptado funciona mediante claves publicas y privadas, a cada usuario que se registre en el servidor con un usuario y una contraseña se le asigna una clave publica y una clave privada. Cuando un cliente solicite encriptar un mensaje se pedira el login del usuario destinatario, y este mensaje se cifrara con las claves del usuario registrado y se devolver\'a el mensaje encriptado. Y viceversa, si se quire desencriptar un mensaje, el cliente se identificara con su login y contraseña y adjuntar\'a el mensaje encriptado que quiere desencriptar, acto seguido el servidor le devolvera el mensaje desencriptado.
+El programa comienza en un estado de INICIO, el cliente realiza la conexi\'on pasando as\'i al MENU. En este caso, el cliente puede elegir entre 3 opciones: registrarse, encriptar o desencriptar. Para REGISTRARSE el servidor le pedir\'a un usuario y una clave, si el usuario es correcto el servidor devolver\'a un mensaje de "regok".Para ENCRIPTAR el cliente deber\'a introducir el usuario destinatario y el mensaje, devolviendo el servidor el texto encriptado. Y por \'ultimo para DESENCRIPTAR el cliente debe introducir su usuario y contraseña y el texto a desencriptar, a lo que el servidor devuelve el mensaje desencriptado.
+ \\Si ocurre alg\'un error, como introducir un usuario y una contraseña erronea, o una opci\'on inexistente, el programa volver\'a a pedir estos datos. Y a la finalizaci\'on de la operaci\'on elegida, se volver\'a otra vez al menu principal pudiendo el cliente así completar varios propositos.
+\\
 
 \includegraphics[width=15cm]{../pdf/diagrama.pdf}
 	Donde $A=USER*PASS*TXT*$ \quad $B=USER*PASS*$ 
@@ -63,6 +66,9 @@ Basicamente, el sistema de encriptado funciona mediante claves publicas y privad
 
 \newpage
 \section{Evaluaci\'on de la aplicaci\'on}
+En este apartado se muestra un ejemplo de ejecuci\'on del programa.
+\\ 
+
 \includegraphics[width=16cm]{captura}
 Como podemos observar un usuario se puede registrar, encriptar un mensaje y desencriptarlo sin ning\'un problema.
 \end{document}
