@@ -1,7 +1,7 @@
 import socket
 import sys
 
-# Creación el socket TCP
+# Creacion el socket TCP
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 server_address = ('localhost', 8989)
@@ -19,25 +19,25 @@ while True:
     try:
         print('conexion desde', client_address)
 
-        # Envias el menú
-        connection.sendall('Menú de opciones:\n-Registrarse(1) \n-Encriptar(2) \n-Desencriptar(3)'.encode())
+        # Envias el menu
+        connection.sendall('Menu de opciones:\n-Registrarse(1) \n-Encriptar(2) \n-Desencriptar(3)'.encode())
 
-        # Lectura del la opción
+        # Lectura del la opcion
         msg_received = ''
         while True:
-            data = connection.recv(4)
+            data = connection.recv(2)
             if not data:
                 print('mensaje completo recibido')
                 break
             msg_received += data.decode()
 
-        option = int(msg_received)
+        option = ord(msg_received)
         if 1 <= option <= 3:
             print('opcion correcta')
-            connection.sendall('1'.encode())       # 1 opción correcta
+            connection.sendall('1'.encode())       # 1 opcion correcta
         else:
             print('opcion incorrecta')
-            connection.sendall('0'.encode())       # 0 opción incorrecta
+            connection.sendall('0'.encode())       # 0 opcion incorrecta
             continue
 
         if option == 1:

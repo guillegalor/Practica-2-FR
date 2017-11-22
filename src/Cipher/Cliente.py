@@ -17,15 +17,18 @@ try:
 
     # Send data
     option = input()
-    sock.sendall(option.encode())
+    sock.sendall(str(unichr(option)))
 
-    # Respuesta del servidor / Si descomentas esta línea se ve el error
-    # sock.recv(1)
+    # Respuesta del servidor / Si descomentas esta linea se ve el error
+    while True:
+        datas = sock.recv(1024)
+        if datas:
+            break
 
-    if True:
-        print('Opción correcta')
+    if data == '1':
+        print('Opcion correcta')
     else:
-        print('Opción incorrecta')
+        print('Opcion incorrecta')
 
 finally:
     print('Cerrando el socket')
